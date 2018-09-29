@@ -1,0 +1,13 @@
+---
+- hosts: build_host
+  become: true
+  vars:
+    lfs_root: /mnt/lfs
+  environment:
+    LFS: "{{ lfs_root }}"
+  tasks:
+    - name: Prepare the host system
+      include: hostprep.yml
+
+    - name: Partition the disk for LFS
+      include: partition.yml
