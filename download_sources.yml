@@ -9,10 +9,10 @@
 - name: Download the sources list
   get_url:
     url: http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list
-    dest: "{{ lfs_root }}/sources/wget-list"
-    force: true
+    dest: "{{ lfs_root }}/sources/"
 
 - name: Download all files from the sources list
-  debug:
-    msg: "Downloading {{ item }}"
+  get_url:
+    url: "{{ item }}"
+    dest: "{{ lfs_root }}/sources/"
   with_items: "{{ lookup('file', lfs_root + '/sources/wget-list').splitlines() }}"
