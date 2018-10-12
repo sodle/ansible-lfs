@@ -35,4 +35,3 @@
   with_items:
     - "{{ lfs_root }}/tools"
     - "{{ lfs_root }}/sources"
-    - "/tools"
