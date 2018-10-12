@@ -1,0 +1,38 @@
+- name: Create the tools directory
+  file:
+    path: "{{ lfs_root }}/tools"
+    state: directory
+    owner: root
+    group: root
+
+- name: Link $LFS/tools to /tools
+  file:
+    path: /tools
+    state: link
+    src: "{{ lfs_root }}/tools"
+    owner: root
+    group: root
+
+- name: Create the LFS group
+  group:
+    name: lfs
+    state: present
+
+- name: Create the LFS user
+  user:
+    name: lfs
+    state: present
+    shell: /bin/bash
+    group: lfs
+    create_home: yes
+    skeleton: /dev/null
+
+- name: Make the new LFS user the owner of the tools and sources directories
+  file:
+    path: "{{ item }}"
+    owner: lfs
+    group: lfs
+  with_items:
+    - "{{ lfs_root }}/tools"
+    - "{{ lfs_root }}/sources"
+    - "/tools"
