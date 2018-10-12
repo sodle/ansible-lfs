@@ -32,13 +32,13 @@
 - name: Mount the root partition
   mount:
     path: "{{ lfs_root }}"
-    src: /dev/vdb1
+    src: /dev/vdb2
     fstype: ext4
     state: mounted
 
 - name: Mount the boot partition
   mount:
     path: "{{ lfs_root }}/boot"
-    src: /dev/vdb2
+    src: /dev/vdb1
     fstype: ext4
     state: mounted
