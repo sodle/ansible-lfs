@@ -5,3 +5,13 @@
     mode: a+wt
     owner: root
     group: root
+
+- name: Download the sources list
+  get_url:
+    url: http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list
+    dest: "{{ lfs_root }}/sources/wget-list"
+    force: true
+
+- name: Download all files from the sources list
+  debug: "Downloading {{ item }}"
+  with_items: "{{ lookup('file', lfs_root + '/sources/wget-list').splitlines() }}"
