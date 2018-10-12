@@ -1,0 +1,2 @@
+- name: Build binutils (stage 1)
+  include: tools/binutils_stage1.yml

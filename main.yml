@@ -17,3 +17,8 @@
 
     - name: Perform the final preparations
       include: final_prep.yml
+
+    - name: Build the LFS build tools
+      become: true
+      become_user: lfs
+      include: build_tools.yml

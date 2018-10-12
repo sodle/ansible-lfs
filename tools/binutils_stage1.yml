@@ -1,0 +1,4 @@
+- name: Unpack binutils
+  remote_src: yes
+  src: "{{ lfs_root }}/sources/binutils-2.31.1.tar.xz"
+  dest: "{{ lfs_root }}/sources"
