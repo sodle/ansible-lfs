@@ -1,9 +1,9 @@
 #!/bin/bash
-cat > ~/.bash_profile << EOF
+cat > ~/.bash_profile << "EOF"
 exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
 EOF
 
-cat > ~/.bashrc << EOF
+cat > ~/.bashrc << "EOF"
 set +h
 umask 022
 LFS=/mnt/lfs
