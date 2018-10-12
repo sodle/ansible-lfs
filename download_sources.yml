@@ -14,7 +14,7 @@
 - name: Download all files from the sources list
   get_url:
     url: "{{ item }}"
-    dest: "{{ lfs_root }}/sources/{{ item }}"
+    dest: "{{ lfs_root }}/sources/{{ item.split('/')[-1] }}"
   with_items: "{{ lookup('file', lfs_root + '/sources/wget-list').splitlines() }}"
 
 - name: Download the md5sums file
