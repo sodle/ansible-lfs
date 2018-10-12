@@ -7,7 +7,7 @@
     LFS: "{{ lfs_root }}"
   tasks:
     - name: Prepare the host system
-      include: hostprep.yml
+      include: host_prep.yml
 
     - name: Partition the disk for LFS
       include: partition.yml
