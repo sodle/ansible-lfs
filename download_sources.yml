@@ -23,6 +23,6 @@
     dest: "{{ lfs_root }}/sources/md5sums"
 
 - name: Check the MD5s of the sources
-  command: "md5sum -c md5sums"
+  command: md5sum -c md5sums
   args:
     chdir: "{{ lfs_root }}/sources/"
