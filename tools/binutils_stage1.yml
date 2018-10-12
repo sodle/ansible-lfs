@@ -6,6 +6,10 @@
     list_files: yes
   register: archive_contents
 
+- name: Print the archive contents
+  debug:
+    msg: "{{ archive_contents }}"
+
 - name: Create binutils build directory
   file:
     path: "{{ lfs_root }}/sources/{{ archive_contents.files[0] }}/build"
