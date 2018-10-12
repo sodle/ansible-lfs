@@ -14,3 +14,6 @@
 
     - name: Download the LFS sources
       include: download_sources.yml
+
+    - name: Perform the final preparations
+      include: final_prep.yml
