@@ -35,3 +35,8 @@
   with_items:
     - "{{ lfs_root }}/tools"
     - "{{ lfs_root }}/sources"
+
+- name: Create the LFS user's dotfiles
+  become: yes
+  become_user: lfs
+  script: scripts/lfs-dotfiles.sh
