@@ -7,7 +7,7 @@
 
 - name: Link $LFS/tools to /tools
   file:
-    path: /tools
+    dest: /tools
     state: link
     src: "{{ lfs_root }}/tools"
     owner: root
