@@ -13,5 +13,6 @@
     force: true
 
 - name: Download all files from the sources list
-  debug: "Downloading {{ item }}"
+  debug:
+    msg: "Downloading {{ item }}"
   with_items: "{{ lookup('file', lfs_root + '/sources/wget-list').splitlines() }}"
