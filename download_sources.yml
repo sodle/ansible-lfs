@@ -1,0 +1,7 @@
+- name: Create the sources directory
+  file:
+    path: "{{ lfs_root }}/sources"
+    state: directory
+    mode: a+wt
+    owner: root
+    group: root

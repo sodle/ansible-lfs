@@ -11,3 +11,6 @@
 
     - name: Partition the disk for LFS
       include: partition.yml
+
+    - name: Download the LFS sources
+      include: download_sources.yml
