@@ -16,3 +16,13 @@
     url: "{{ item }}"
     dest: "{{ lfs_root }}/sources/"
   with_items: "{{ lookup('file', lfs_root + '/sources/wget-list').splitlines() }}"
+
+- name: Download the md5sums file
+  get_url:
+    url: http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums
+    dest: "{{ lfs_root }}/sources/"
+
+- name: Check the MD5s of the sources
+  command: "md5sum -c md5sums"
+  args:
+    chdir: "{{ lfs_root }}/sources/"
