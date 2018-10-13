@@ -10,12 +10,12 @@
     state: directory
 
 - name: Configure the binutils build
-  command: ../configure --prefix=/tools --with-sysroot=$LFS --with-lib-path=/tools/lib --target=$LFS_TGT --disable-nls --disable-werror
+  shell: ../configure --prefix=/tools --with-sysroot=$LFS --with-lib-path=/tools/lib --target=$LFS_TGT --disable-nls --disable-werror
   args:
     chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
 - name: Build binutils
-  command: make
+  shell: make
   args:
     chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
@@ -31,7 +31,7 @@
     src: /tools/lib
 
 - name: Install binutils
-  command: make install
+  shell: make install
   args:
     chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
