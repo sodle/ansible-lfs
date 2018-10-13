@@ -8,7 +8,7 @@
 
 - name: Download the sources list
   get_url:
-    url: http://www.linuxfromscratch.org/lfs/view/stable-systemd/wget-list
+    url: http://www.linuxfromscratch.org/lfs/view/8.3-systemd/wget-list
     dest: "{{ lfs_root }}/sources/wget-list"
 
 - name: Download all files from the sources list
@@ -19,7 +19,7 @@
 
 - name: Download the md5sums file
   get_url:
-    url: http://www.linuxfromscratch.org/lfs/view/stable-systemd/md5sums
+    url: http://www.linuxfromscratch.org/lfs/view/8.3-systemd/md5sums
     dest: "{{ lfs_root }}/sources/md5sums"
 
 - name: Check the MD5s of the sources
