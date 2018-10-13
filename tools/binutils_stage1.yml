@@ -2,22 +2,22 @@
   unarchive:
     remote_src: yes
     src: "{{ lfs_root }}/sources/binutils-2.31.1.tar.xz"
-    dest: "{{ lfs_root }}/sources/binutils"
+    dest: "{{ lfs_root }}/sources"
 
 - name: Create binutils build directory
   file:
-    path: "{{ lfs_root }}/sources/binutils/build"
+    path: "{{ lfs_root }}/sources/binutils-2.31.1/build"
     state: directory
 
 - name: Configure the binutils build
   shell: ../configure --prefix=/tools --with-sysroot=$LFS --with-lib-path=/tools/lib --target=$LFS_TGT --disable-nls --disable-werror
   args:
-    chdir: "{{ lfs_root }}/sources/binutils/build"
+    chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
 - name: Build binutils
   shell: make
   args:
-    chdir: "{{ lfs_root }}/sources/binutils/build"
+    chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
 - name: Create the lib directory
   file:
@@ -33,9 +33,9 @@
 - name: Install binutils
   shell: make install
   args:
-    chdir: "{{ lfs_root }}/sources/binutils/build"
+    chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
 - name: Clean the source directory
   file:
-    path: "{{ lfs_root }}/sources/binutils"
+    path: "{{ lfs_root }}/sources/binutils-2.31.1"
     state: absent
