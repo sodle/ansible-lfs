@@ -1,0 +1,53 @@
+- name: Unpack GCC
+  unarchive:
+    remote_src: yes
+    src: "{{ lfs_root }}/sources/gcc-8.2.0.tar.xz"
+    dest: "{{ lfs_root }}/sources"
+
+- name: Create GCC build directory
+  file:
+    path: "{{ lfs_root }}/sources/gcc-8.2.0/build"
+    state: directory
+
+- name: Unpack MPFR
+  unarchive:
+    remote_src: yes
+    src: "{{ lfs_root }}/sources/mpfr-4.0.1.tar.xz"
+    dest: "{{ lfs_root }}/sources/gcc-8.2.0"
+
+- name: Unpack GMP
+  unarchive:
+    remote_src: yes
+    src: "{{ lfs_root }}/sources/gmp-6.1.2.tar.xz"
+    dest: "{{ lfs_root }}/sources/gcc-8.2.0"
+
+- name: Unpack MPC
+  unarchive:
+    remote_src: yes
+    src: "{{ lfs_root }}/sources/mpc-1.1.0.tar.gz"
+    dest: "{{ lfs_root }}/sources/gcc-8.2.0"
+
+- name: Run a script to prepare for the GCC build
+  script: scripts/gcc_stage1_prep.sh
+  args:
+    chdir: "{{ lfs_root }}/sources/gcc-8.2.0"
+
+- name: Configure the GCC build
+  shell: ../configure --target=$LFS_TGT --prefix=/tools --with-glibc-version=2.11 --with-sysroot=$LFS --with-newlib --without-headers --with-local-prefix=/tools --with-native-system-header-dir=/tools/include --disable-nls --disable-shared --disable-multilib --disable-decimal-float --disable-threads --disable-libatomic --disable-libgomp --disable-libmpx --disable-libquadmath --disable-libssp --disable-libvtv --disable-libstdcxx --enable-languages=c,c++
+  args:
+    chdir: "{{ lfs_root }}/sources/gcc-8.2.0"
+
+- name: Build GCC
+  shell: make
+  args:
+    chdir: "{{ lfs_root }}/sources/gcc-8.2.0"
+
+- name: Install GCC
+  shell: make install
+  args:
+    chdir: "{{ lfs_root }}/sources/gcc-8.2.0"
+
+- name: Clean up the sources
+  file:
+    path: "{{ lfs_root }}/sources/gcc-8.2.0"
+    state: absent

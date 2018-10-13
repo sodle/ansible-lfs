@@ -1,2 +1,5 @@
 - name: Build binutils (stage 1)
   include: tools/binutils_stage1.yml
+
+- name: Build GCC (stage 1)
+  include: tools/gcc_stage1.yml
