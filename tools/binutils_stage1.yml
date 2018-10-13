@@ -3,27 +3,21 @@
     remote_src: yes
     src: "{{ lfs_root }}/sources/binutils-2.31.1.tar.xz"
     dest: "{{ lfs_root }}/sources"
-    list_files: yes
-  register: archive_contents
-
-- name: Print the archive contents
-  debug:
-    msg: "{{ archive_contents }}"
 
 - name: Create binutils build directory
   file:
-    path: "{{ lfs_root }}/sources/{{ archive_contents.files[0] }}/build"
+    path: "{{ lfs_root }}/sources/binutils-2.31.1/build"
     state: directory
 
 - name: Configure the binutils build
   command: ../configure --prefix=/tools --with-sysroot=$LFS --with-lib-path=/tools/lib --target=$LFS_TGT --disable-nls --disable-werror
   args:
-    chdir: "{{ lfs_root }}/sources/{{ archive_contents.files[0] }}/build"
+    chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
 - name: Build binutils
   command: make
   args:
-    chdir: "{{ lfs_root }}/sources/{{ archive_contents.files[0] }}/build"
+    chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
 - name: Create the lib directory
   file:
@@ -39,9 +33,9 @@
 - name: Install binutils
   command: make install
   args:
-    chdir: "{{ lfs_root }}/sources/{{ archive_contents.files[0] }}/build"
+    chdir: "{{ lfs_root }}/sources/binutils-2.31.1/build"
 
 - name: Clean the source directory
   file:
-    path: "{{ lfs_root }}/sources/{{ archive_contents.files[0] }}"
+    path: "{{ lfs_root }}/sources/binutils-2.31.1"
     state: absent
